@@ -86,6 +86,35 @@ adb uninstall com.xxd.vpnspot
 ./gradlew installDebug
 ```
 
+## Build A Release APK
+
+Build an installable release APK:
+
+```bash
+./gradlew assembleRelease
+```
+
+The APK is generated here:
+
+```text
+app/build/outputs/apk/release/app-release.apk
+```
+
+For sharing a versioned file, copy it with the release version in the filename:
+
+```bash
+mkdir -p release
+cp app/build/outputs/apk/release/app-release.apk release/vpnspot-v0.0.1.apk
+```
+
+Install that APK on a phone:
+
+```bash
+adb install -r release/vpnspot-v0.0.1.apk
+```
+
+The current release build is signed with the Android debug signing key so it can be installed directly for internal testing. A public production build should be signed with a private release keystore before distribution.
+
 ## Usage
 
 1. Open `vpnspot` on the phone.
@@ -109,6 +138,12 @@ Build the debug APK:
 
 ```bash
 ./gradlew assembleDebug
+```
+
+Build the release APK:
+
+```bash
+./gradlew assembleRelease
 ```
 
 Install the debug APK on the connected phone:
